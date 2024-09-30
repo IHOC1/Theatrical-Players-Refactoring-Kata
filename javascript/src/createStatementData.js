@@ -8,7 +8,7 @@ function createStatementData(invoice, plays) {
     return statementData;
 
     function enrichPerformance(aPerformance) {
-        const calculator = new PerformanceCalculator(aPerformance, playFor(aPerformance));
+        const calculator = createPerformanceCalculator(aPerformance, playFor(aPerformance));
         const result = Object.assign({}, aPerformance)
         result.play = playFor(result);
         result.amount = calculator.amount;
@@ -47,6 +47,10 @@ function renderPlainText(data, plays) {
                            minimumFractionDigits: 2 }).format(aNumber/100);
     }
 
+}
+
+function createPerformanceCalculator(aPerformance, aPlay) {
+    return new PerformanceCalculator(aPerformance, aPlay);
 }
 
 class PerformanceCalculator {
